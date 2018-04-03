@@ -62,10 +62,17 @@ server:
   access-control: 172.16.0.0/12 allow
   access-control: 10.0.0.0/8 allow
   include: /opt/unbound/etc/unbound/a-records.conf
+  do-tcp: yes
+  hide-identity: yes
+  hide-version: yes
+  ssl-upstream: yes
+  use-caps-for-id: yes
   forward-zone:
-    name: "."
-    forward-addr: 8.8.8.8
-    forward-addr: 8.8.4.4
+   name: "."
+   forward-addr: 9.9.9.9@853         # quad9.net primary
+   forward-addr: 1.1.1.1@853         # cloudflare primary
+   forward-addr: 149.112.112.112@853 # quad9.net secondary
+   forward-addr: 1.0.0.1@853         # cloudflare secondary
 EOT
 
 mkdir -p /opt/unbound/etc/unbound/dev && \
